@@ -1,0 +1,74 @@
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+        <div class="row">
+            <div class="col-md-6">
+              <div class="col-md-6">
+                <div class="text-center mt-5"> <img src="https://i.imgur.com/98GXnDD.png" width="400"> </div>
+              </div>
+              <form (ngSubmit)="onSubmit()" #f="ngForm" >
+                    <h3>Registration</h3>
+
+                    <div class="inputbox mt-3"> <span>Id</span> <input disabled type="text" class="form-control" id="id_user" required [(ngModel)]="client.id_user" name="id_user"> </div>
+                    
+                    <div class="inputbox mt-3"> <span>First Name</span> 
+                    <input name ="firstname" type="text" class="form-control" id="first_name" ngModel required #fn="ngModel" [(ngModel)]="client.first_name" name="first_name"> </div>
+                    <div class="error" *ngIf="fn.touched && fn.invalid"><span><i class="fas fa-info-circle">le firstName est obligatoire</i></span></div>
+
+
+                        <div class="inputbox mt-3"> <span>Last Name</span> 
+                        <input type="text" class="form-control" id="last_name" ngModel required #ln="ngModel" [(ngModel)]="client.last_name" name="last_name"> </div>
+                        <div class="error" *ngIf="fn.touched && fn.invalid"><span><i class="fas fa-info-circle">le lastName est obligatoire</i></span></div>
+
+                       
+                   
+                   <div class="inputbox mt-3"> <span>Username</span> 
+                    <input type="text" class="form-control" id="username" ngModel required #un="ngModel" [(ngModel)]="client.username" name="username"> </div>
+                    <div class="error" *ngIf="fn.touched && fn.invalid"><span><i class="fas fa-info-circle">le UserName est obligatoire</i></span></div>
+
+                    
+
+                    <div class="inputbox mt-3"> <span>Email</span>
+                    <input type="text" class="form-control" id="email" ngModel required #em="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" [(ngModel)]="client.email" name="email"> </div>
+                    <div class="error" *ngIf="em.touched && em.invalid">
+                        <span><i class="fas fa-info-circle">
+                      <div *ngIf="em.errors.required">l'email est obligatoire</div>
+                      <div *ngIf="em.errors.pattern">il faut respecter la forme de l'email</div>
+                    </i></span>
+                    </div>
+
+
+                    <div class="inputbox mt-3"> <span>Phone number</span> 
+                    <input type="text" class="form-control" id="phone_number" ngModel required #pn="ngModel" pattern=[0-9]{8} [(ngModel)]="client.phone_number" name="phone_number"> </div>
+                    <div class="error" *ngIf="pn.touched && pn.invalid">
+                        <span><i class="fas fa-info-circle">
+                      <div *ngIf="pn.errors.required">Veuillez écrire ton numéro de téléphone </div>
+                      <div *ngIf="pn.errors.pattern">veuiullez entrer le numéro correctement</div>
+                    </i></span>
+                    </div>
+
+                   
+                   
+                    <div class="inputbox mt-3"> <span>Password</span>
+                    <input type="password" class="form-control" id="password" ngModel required #pw="ngModel" [(ngModel)]="client.password" name="password"> </div>
+                    <div class="error" *ngIf="pw.touched && pw.invalid"><span><i class="fas fa-info-circle"> le password est obligatoire   </i></span> </div>
+
+                    <div class="inputbox mt-3"> <span>gender</span> <input type="text" class="form-control" id="gender" required [(ngModel)]="client.gender" name="gender"> </div>
+                   <div class="inputbox mt-3"> <span>Address</span> <input type="text" class="form-control" id="address" ngModel required #ad="ngModel" [(ngModel)]="client.address" name="address"> </div>
+                   <div *ngIf="ad.touched && ad.invalid"> Veuillez remplir le champ de l'address</div>
+
+                   <div class="inputbox mt-3"> <span>City</span> <input type="text" class="form-control" id="city" required [(ngModel)]="client.city" name="city"> </div>
+                   <div class="inputbox mt-3"> <span>Role</span> <input disabled type="text" class="form-control" id="role"  value="CLIENT" name="role"> </div>
+                  <div class="inputbox mt-3"> <span>Date Creation Du Compte</span> <input placeholder="AAAA-MM-JJ"  type="text" class="form-control" id="date" required [(ngModel)]="client.date" name="date"> </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-right"> 
+                          <button class="btn btn-success register btn-block" type="submit" [disabled]="f.invalid" >Register</button> 
+                       
+                    </div>
+                    
+                </div>
+              </form>
+            
+
+        </div>
+    </div>
+  </div>

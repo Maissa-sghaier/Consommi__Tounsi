@@ -1,0 +1,90 @@
+<header>
+    <div class="header-area black-bg">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="show-mobile-menu d-block d-md-none"></div>
+                <nav class="main-menu text-center d-none d-md-block" id="mobile-menu">
+                    <ul>
+                        <li><img src="assets/img/site-logo.png" alt=""></li>
+                        <li><a routerLink='/home'>Home </a></li>
+                        <li><a routerLink='/categoryList'>Category List <i class="fas fa-angle-down"> </i></a>
+                            <ul class="submenu" >
+                                <li *ngFor="let category of categories| async"><a [routerLink]="['/client/Productfitred', category.id_category,0,0,0,0,0]" >{{category.name_category}}</a></li>
+                            </ul>
+                           </li>
+                        <li class="feature "><a class="navbar-brand mb-0" routerLink='/client/productList/'>Products</a>
+                           
+                        
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>
+                        
+                        <li><a href="#">event <i class="fas fa-angle-down"></i></a>
+
+                            <ul class="submenu">
+                                <li><a href="checkEvent.html">Check Events</a></li>
+                                <li><a href="http://localhost:4200/client/PassedEvents">Check passed Events</a></li>
+                                <li><a href="CheckupcomingEvents">Check upcoming Events</a></li>
+                            </ul>
+                            </li>
+                            <li><a href="contact.html">Contact us</a></li>
+                            <li>
+                            <ul class="header-top-right mb-20">
+                                <li data-toggle="modal" data-target="#searchModal"><a href="javascript:void(0)"><i class="fas fa-search"></i></a></li>
+                                <li class="user"><a href="#"><i class="fas fa-user"></i></a>
+                                    <ul class="hover-toggle">
+                                        <li><a href="#">MyAccount</a></li>
+                                        <li><a href="wishlist.html">MyWishlist</a></li>
+                                        <li><a href="cart.html">MyCart</a></li>
+                                        <li><a href="checkout.html">Checkout</a></li>
+                                        <li><a routerLink='/login'>Login</a></li>
+                                    </ul>
+                                </li>
+                                <li class="cart"><i class="fas fa-shopping-cart"></i><span class="total-cart" routerLink="cart" (click)="hovering()">{{itemsCount}}</span>
+                                    <ul class="hover-toggle" *ngIf="itemsCount==0; else ElseBlock">
+                                        <li>
+                                            <div class="cart-img img-styling "> <img src="assets/img/emptycart.png"></div>
+                                        </li>
+                                    </ul>
+                                    <ng-template #ElseBlock>
+                                        <ul class="hover-toggle">
+                                        <li  *ngFor= "let item of cartitems">
+                                            <div class="cart-img img-styling ">
+                                                <img src="{{'http://localhost:8082/api/v7/registration/Imgarticles/'+item.productid}}" >
+                                            </div>
+                                            <div class="cart-content">
+                                                <span>{{item.productname}}</span>
+                                                <div class="price">
+                                                   <span>{{item.price}}</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        
+                                        <li>
+                                            <div class="sub-total">
+                                                <span>Subtotal</span>
+                                                <span class="total">work in progress</span>
+                                            </div>
+                                        </li>
+                                           <div class="mini-cart-btn">
+                                                <a href="cart.html" class="border-btn" routerLink="cart">View Cart <i class="fas fa-angle-right"></i></a>
+                                                <a href="cart.html" class="border-btn">Order  History <i class="fas fa-angle-right"></i></a>
+                                           </div>
+                                        </ul>
+                                        </ng-template>
+                                    
+                                </li>
+                            </ul>
+                        </li>     
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div align="left" class="box">                            
+        <a href="http://localhost:8082/springMVC/servlet/?" title="Ceci est un lien image HTML">
+            <img width="60" height="60" margin-left="0" alt="texte alternatif pour le lien image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToTFtqN8yDdepSGKuXAmMRrFlGKKKhF8d50w&usqp=CAU" />
+        </a>
+        </div>
+                                            
+       
+</header>

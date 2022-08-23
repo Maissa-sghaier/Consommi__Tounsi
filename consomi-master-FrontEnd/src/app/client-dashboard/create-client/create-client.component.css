@@ -1,0 +1,8 @@
+h3{
+    color: brown;
+    position:static;
+}
+.error{
+    color: rgb(228, 32, 32);
+    font-family: 'PT Sans', sans-serif
+}

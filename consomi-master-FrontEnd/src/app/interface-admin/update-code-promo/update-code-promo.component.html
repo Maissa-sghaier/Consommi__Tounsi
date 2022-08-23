@@ -1,0 +1,38 @@
+<div class="body-background">
+    <div class="container mt-5 ">
+        <div class='overflow-x-auto w-full'>
+     
+        <table class="table table-borderless table-responsive card-1 p-4" border="1">
+          <thead class="bg-gray-900">
+            <tr class="border-bottom">
+  
+                <th>Name</th>
+                <th>status</th>
+                <th>available number</th>
+  
+  
+                
+           </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let code of codePromos | async">
+              
+              <td><h3>{{code.code_promo}}</h3></td>
+              <td><h3>{{code.status_CodePromo}}</h3></td>
+              <td><h3>{{code.available_nbr}}</h3></td>
+  
+             
+              
+              <td><button class="btn btn-success" [disabled]="code.status_CodePromo" (click)="activateCode(code.id_codePromo)">activate </button>     </td>
+  
+              <td><button class="btn btn-primary" [disabled]="!code.status_CodePromo" (click)="desactivateCode(code.id_codePromo)">desactivate</button>            </td>
+  
+              <td><button class="btn btn-danger" (click)="deleteCodePromo(code.id_codePromo)">delete</button>            </td>
+  
+  
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

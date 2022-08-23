@@ -1,0 +1,84 @@
+<div class="body-background">
+    <div class="container mt-5 ">
+        <div class='overflow-x-auto w-full'>
+          <h2>Update Provider</h2>
+    
+              <table class="table table-borderless table-responsive card-1 p-4" border="1">
+              <thead class="bg-gray-900">
+                  <tr  class="border-bottom">
+        
+                      <th >Name</th>
+                      <th>email</th>
+                      <th>phone number</th>
+                      <th>RIB</th>
+    
+                          
+                 </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let p of providers | async">
+                    <td><h3>{{p.name_provider}}</h3></td>
+                    <td><h3>{{p.email}}</h3></td>
+                    <td><h3>{{p.phone_number}}</h3></td>
+                    <td><h3>{{p.rib}}</h3></td>
+    
+                
+                   
+                    
+        
+                    <td><button class="btn btn-success" (click)="open(content,p)">update</button></td>
+    
+                    <td><button class="btn btn-danger" (click)="deleteProvider(p.id_provider)">delete</button> </td>
+        
+        
+                  </tr>
+                </tbody>
+              </table>
+            
+          </div>
+        </div>
+      </div>
+    
+    
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">update provider</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="onSubmit()">
+            <div class="form px-4">
+              <label for="name">Id provider</label>
+              <input type="text" class="form-control" id="id_provider" disabled [(ngModel)]="providerToupload.id_provider" name="id_provider" >
+            </div>
+    
+            <div class="form px-4">
+              <label for="name">Provider Name</label>
+              <input type="text" class="form-control" id="name_provider" required [(ngModel)]="providerToupload.name_provider" name="name_provider" >
+            </div>
+        
+            <div class="form px-4">
+              <label for="name">Email</label>
+              <input type="text" class="form-control" id="email" required [(ngModel)]="providerToupload.email" name="email" >
+            </div>
+        
+            <div class="form px-4">
+              <label for="name">phone number</label>
+              <input type="text" class="form-control" id="phone_number" required [(ngModel)]="providerToupload.phone_number" name="phone_number" >
+            </div>
+        
+            <div class="form px-4">
+              <label for="name">RIB</label>
+              <input type="text" class="form-control" id="rib" required [(ngModel)]="providerToupload.rib" name="rib" >
+            </div>
+    
+          </form>
+          </div>
+          <div class="modal-footer">
+           <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">submit</button>-->
+            <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">submit</button>
+    
+          </div>
+        </ng-template>

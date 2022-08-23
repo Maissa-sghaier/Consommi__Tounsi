@@ -1,0 +1,32 @@
+<div class="body-background">
+    <div class="container mt-5 ">
+        <div class='overflow-x-auto w-full'>
+          <div class="pull-right">
+          <button routerLink='/createCategory' class="btn btn-success">Add new category</button>
+          </div>
+        <table class="table table-borderless table-responsive card-1 p-4" border="1">
+          <thead class="bg-gray-900">
+            <tr class="border-bottom">
+  
+                <th>Name</th>
+                <th>See products related</th>
+                <th>Delete?</th>
+                
+           </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let category of categories | async">
+              
+              <td><h3>{{category.name_category}}</h3></td>
+              
+          <!--    <td><button [routerLink]="['/Productfitred', category.id_category,0,0,0,0,0]" class="btn btn-default">View all products</button> -->
+  
+                <td><button (click)="deleteCategory(category.id_category)" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+   

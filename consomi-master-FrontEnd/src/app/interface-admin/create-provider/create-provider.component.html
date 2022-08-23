@@ -1,0 +1,39 @@
+<div class="body-background">
+    <div [hidden]="submitted" style="width: 500px;" class="container rounded mt-5 bg-white p-md-5">
+    <div class="h2 font-weight-bold">Add new provider</div>
+  
+    <form (ngSubmit)="onSubmit()">
+      
+      
+      <div class="form px-4">
+        <label for="name">Provider Name</label>
+        <input type="text" class="form-control" id="name_provider" required [(ngModel)]="provider.name_provider" name="name_provider">
+      </div>
+  
+      <div class="form px-4">
+        <label for="name">Email</label>
+        <input type="text" class="form-control" id="email" required [(ngModel)]="provider.email" name="email">
+      </div>
+  
+      <div class="form px-4">
+        <label for="name">phone number</label>
+        <input type="text" class="form-control" id="phone_number" required [(ngModel)]="provider.phone_number" name="phone_number">
+      </div>
+  
+      <div class="form px-4">
+        <label for="name">RIB</label>
+        <input type="text" class="form-control" id="rib" required [(ngModel)]="provider.rib" name="rib">
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <button type="submit" class="btn btn-success" (onclick)=' onSubmit()' > <span>Submit</span>  </button> </div>
+        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <button type="back" class="btn btn-primary" routerLink="/client/updateProvider"> <span>Back </span></button> </div>
+      </div>
+  
+  </form>
+  </div>
+  </div>
+  <div [hidden]="!submitted">
+    <h4>You submitted successfully!</h4>
+    <!-- <button class="btn btn-success" (click)="newDeliverym()">Add</button> -->
+  </div>

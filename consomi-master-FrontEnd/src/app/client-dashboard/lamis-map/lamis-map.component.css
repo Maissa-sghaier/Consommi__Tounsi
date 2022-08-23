@@ -1,0 +1,24 @@
+@import "~leaflet/dist/leaflet.css";
+
+
+#map {width:50vw;
+    height:50vw;
+    margin:auto;
+         }
+.map-border {
+    border: 5px solid rgb(248, 235, 209);
+    height: 100%;
+    width:50vw;
+    height:50vw;
+    margin:auto;
+  }
+
+  .map-wrapper {
+    
+    width:100vw;
+    height:100vw;
+    margin:auto;
+
+
+}
+

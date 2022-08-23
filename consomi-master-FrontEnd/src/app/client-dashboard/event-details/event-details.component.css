@@ -1,0 +1,13 @@
+#htitre {
+    position: relative;
+    font-family: Impact, sans-serif;
+    font-size: 45px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #90EE90, #46d7f1, rgb(7, 233, 7));
+    background-repeat: no-repeat;
+   
+  
+    
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+    
+  }

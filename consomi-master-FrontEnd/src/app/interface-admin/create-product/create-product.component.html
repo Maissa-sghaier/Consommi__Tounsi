@@ -1,0 +1,100 @@
+<div class="body-background">
+    <div [hidden]="submitted" style="width: 500px;" class="container rounded mt-5 bg-white p-md-5">
+      <div class="h2 font-weight-bold">Add new product</div>
+    
+      <form (ngSubmit)="onSubmit()">
+        
+        
+        <div class="form px-4">
+          <label for="name">Product Name</label>
+          <input type="text" class="form-control" id="name" required [(ngModel)]="product.name" name="name">
+        </div>
+    
+        <div class="form px-4">
+          <label for="name">Description</label>
+          <input type="text" class="form-control" id="description" required [(ngModel)]="product.description" name="description">
+        </div>
+    
+        <div class="form px-4">
+          <label for="name">weight</label>
+          <input type="text" class="form-control" id="poids" required [(ngModel)]="product.poids" name="poids">
+        </div>
+    
+        <div class="form px-4">
+          <label for="name">expiration date</label>
+          <input type="date" class="form-control" id="expDate" required [(ngModel)]="product.expDate" name="expDate">
+        </div>
+        <div class="form px-4">
+            <label for="name">price</label>
+            <input type="text" class="form-control" id="price" required [(ngModel)]="product.price" name="price">
+          </div>
+          <div class="form px-4">
+            <label for="name">selling price</label>
+            <input type="text" class="form-control" id="selling_price" required [(ngModel)]="product.selling_price" name="selling_price">
+          </div>
+          <div class="form px-4">
+            <label for="name">stock</label>
+            <input type="number" class="form-control" id="stock" required [(ngModel)]="product.stock" name="stock">
+          </div>
+          <div class="form px-4">
+            <label for="name">promotion status</label>
+            <select class="dropdown-toggle" id="status_promotion" [(ngModel)]="product.status_promotion" name="status_promotion" >
+              <option selected disabled hidden>-- -- </option>
+              <optgroup  >
+                  <option value="false">False</option>
+    
+              <option value="true">True</option>
+              </optgroup>
+            </select> 
+          </div>
+          <div class="form px-4">
+            <label for="name">promotion percentage</label>
+            <input type="number" class="form-control" id="promotion_percentage" required [(ngModel)]="product.promotion_percentage" name="promotion_percentage">
+          </div>
+          <div class="form px-4">
+            <label for="name">date beginning promotion</label>
+            <input type="date" class="form-control" id="date_beginning_promotion" required [(ngModel)]="product.date_beginning_promotion" name="date_beginning_promotion">
+          </div>
+          <div class="form px-4">
+            <label for="name">date ending promotion</label>
+            <input type="date" class="form-control" id="date_end_promotion" required [(ngModel)]="product.date_end_promotion" name="date_end_promotion">
+          </div>
+          <div class="form px-4">
+            <label for="name">category</label>
+            <select class="dropdown-toggle" id="id_category" [(ngModel)]="product.id_category"  name="id_category">
+              <option  selected disabled hidden>-- -- </option>
+              <optgroup  *ngFor="let c of categories | async">
+    
+              <option value="{{c.id_category}}">{{c.name_category}}</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="form px-4">
+            <label for="name">provider</label>
+             <select class="dropdown-toggle" id="id_provider" [(ngModel)]="product.id_provider" name="id_provider">
+              <option selected disabled hidden>-- -- </option>
+              <optgroup  *ngFor="let p of providers | async">
+    
+              <option value="{{p.id_provider}}">{{p.name_provider}}</option>
+              </optgroup>
+            </select> 
+          </div>
+         
+    
+     <br/>
+    
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <button type="submit" class="btn btn-success" (onclick)='onSubmit()' > <span>Submit</span>  </button> </div>
+    </div>
+    
+    
+    
+    </form>
+    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6"> <button type="back" class="btn btn-primary" routerLink="/client/updateProduct"> <span>Back </span></button> </div>
+
+    </div>
+    </div>
+    <div [hidden]="!submitted">
+      <h4>You submitted successfully!</h4>
+      <!-- <button class="btn btn-success" (click)="newDeliverym()">Add</button> -->
+    </div>

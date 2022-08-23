@@ -1,0 +1,32 @@
+<h1 text>Passed Events</h1>
+<div class="container d-flex align-items-stretch justify-content-center position-relative flex-wrap"  *ngFor="let event of events | async" >
+    <div class="card d-flex position-relative flex-column" >
+        <div class='imgContainer'> <img src='https://scontent.ftun6-1.fna.fbcdn.net/v/t1.6435-9/183453892_477670016990445_1040553285503070540_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=730e14&_nc_ohc=BZiZieIIVVIAX_oYXZx&_nc_ht=scontent.ftun6-1.fna&oh=5ea3c9e55db6424ef060fa32c5d2089a&oe=60B95998'> </div>
+        <div class="content">
+            <h3>{{event.nameEvent}}</h3>
+            
+            <p>{{event.descriptionEvent}} <br>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                  </svg>
+                  <b>{{event.placeEvent}}</b>
+                  <br>
+        
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar2-check-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5zm-2.6 5.854a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                  </svg>
+                  this Event started at <b>{{event.startDateEvent}} </b>and finiched in <b>{{event.endDateEvent}}</b>
+            </p>
+            <br>
+            
+        </div>
+        <button (click)="getEventDetail(event.idEvent)" class="btn btn-outline-primary" style="margin-left: 15px">Details</button>
+        <br>
+        <br>
+        <br>
+            <br>
+    </div>
+    <br>
+    <br>
+    </div>

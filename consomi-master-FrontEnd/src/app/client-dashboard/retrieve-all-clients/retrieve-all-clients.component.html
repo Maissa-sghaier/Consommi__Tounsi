@@ -1,0 +1,46 @@
+<div class="panel-heading">
+    <h2>Client List</h2>
+  </div>
+  <div class="panel-body" >
+    <table class="table table-striped" border="1">
+      <thead>
+        <tr>
+
+            <th>id</th>
+            <th>email</th>
+            <th>username</th>
+            <th>first name</th>
+            <th>last name</th>
+            <th>phone number</th>
+            <th>password</th>
+            <th>role</th>
+            <th>date</th>
+             <th>gender</th>
+            <th>address</th>
+            <th>city</th>
+           
+            
+       </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of listClient | async">
+          
+          <td><h6>{{d.id_user}}</h6></td>
+          <td><h6>{{d.email}}</h6></td>
+          <td><h6>{{d.username}}</h6></td>
+          <td><h6>{{d.first_name}}</h6></td>
+          <td><h6>{{d.last_name}}</h6></td>
+          <td><h6>{{d.phone_number}}</h6></td>
+          <td><h6>{{d.password}}</h6></td>
+          <td><h6>{{d.role}}</h6></td>
+          <td><h6>{{d.date}}</h6></td>
+          <td><h6>{{d.gender}}</h6></td>
+          <td><h6>{{d.address}}</h6></td>
+           <td><h6>{{d.city}}</h6></td>
+          
+          
+          
+          </tr>
+      </tbody>
+    </table>
+  </div>

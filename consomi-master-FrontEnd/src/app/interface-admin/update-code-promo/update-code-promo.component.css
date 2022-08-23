@@ -1,0 +1,15 @@
+.card-1 {
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    background-color: white;
+   
+}
+
+.icons i {
+    margin-left: 20px
+}
+.body-background {
+    height: 100vh;
+    background-image: linear-gradient(to right top, #cbe7f7, #c1e4fc)
+}

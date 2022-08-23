@@ -1,0 +1,187 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2>Deliveryman List</h2>
+    </div>
+    <div class="panel-body" >
+      <table class="table table-striped" border="1">
+        <thead>
+          <tr>
+
+              <th>id</th>
+              <th>email</th>
+              <th>username</th>
+              <th>phone number</th>
+              <th>password</th>
+              <th>role</th>
+              <th>date</th>
+              <th>first name</th>
+              <th>gender</th>
+              <th>last name</th>
+              <th>address</th>
+              <th>salary</th>
+              <th>cin</th>
+              <th>city</th>
+             
+              
+         </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of listDeliveryman | async">
+            
+            <td><h6>{{d.id_user}}</h6></td>
+            <td><h6>{{d.email}}</h6></td>
+            <td><h6>{{d.username}}</h6></td>
+            <td><h6>{{d.phone_number}}</h6></td>
+            <td><h6>{{d.password}}</h6></td>
+            <td><h6>{{d.role}}</h6></td>
+            <td><h6>{{d.date}}</h6></td>
+            <td><h6>{{d.first_name}}</h6></td>
+            <td><h6>{{d.gender}}</h6></td>
+            <td><h6>{{d.last_name}}</h6></td>
+            <td><h6>{{d.address}}</h6></td>
+            <td><h6>{{d.salary}}</h6></td>
+            <td><h6>{{d.cin}}</h6></td>
+            <td><h6>{{d.city}}</h6></td>
+            
+            <button  class="btn btn-danger" (click)="DeleteDeliveryman(d.id_user)">
+                Delete  
+            </button>
+            <li><a [routerLink]="['/deliveryManInterface',d.id_user]">Update</a></li>
+            
+            </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <li><button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-success">Add deliveryMan</button></li>
+
+    
+    <div id="myModal2" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+         
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+                      <div class="modal-body">
+              
+                          <label for="username" >Name</label>
+                          <input type="text" class="form-control" id="username" ngModel required #username="ngModel" [(ngModel)]="deliveryMan.username" name="username">
+                          <div *ngIf="username.touched && username.invalid" > 
+                            <div *ngIf="username.errors.required">le username est obligatoire</div>
+         
+                        </div>
+                        
+                          <label for="first_name">FirstName</label>
+                          <input type="text" class="form-control" id="first_name" ngModel required #firstname="ngModel" [(ngModel)]="deliveryMan.first_name" name="first_name">
+                          <div *ngIf="firstname.touched && firstname.invalid" > 
+                            <div *ngIf="firstname.errors.required">le firstname est obligatoire</div>
+                            
+                        </div>
+                        
+                          <label for="last_name">LastName</label>
+                          <input type="text" class="form-control" id="last_name" ngModel required #lastname="ngModel" [(ngModel)]="deliveryMan.last_name" name="last_name">
+                          <div *ngIf="lastname.touched && lastname.invalid" > 
+                          <div *ngIf="lastname.errors.required">le lastname est obligatoire</div>
+                          
+                      </div>
+                    
+                    
+                        
+                          <label for="email">Email</label>
+                          <input type="text" class="form-control" id="email" placeholder="your-email@site.com" [(ngModel)]="deliveryMan.email" ngModel required #EM="ngModel" > <br>
+                          <div *ngIf="EM.touched && EM.invalid" > 
+                              <div *ngIf="EM.errors.required">l'email est obligatoire</div>
+                              
+                          </div>
+                        
+                        
+                          <label for="phone_number">Phone number</label>
+                          <input type="text" class="form-control" id="phone_number" required [(ngModel)]="deliveryMan.phone_number" name="phone_number">
+                        
+                       
+                          <label for="password">Password</label>
+                          <input type="password" class="form-control" id="password"  ngModel  required #password="ngModel"  minlength="3" [(ngModel)]="deliveryMan.password" name="password">
+                          <div *ngIf="password.invalid">
+                            <div *ngIf="password.touched && password.errors.required">password obligatoire</div>
+                           <div *ngIf="password.errors.minlength">minimum  3 caractères</div>
+                         </div> 
+
+
+
+                          <label for="date">Date</label>
+                          <input type="text" class="form-control" id="date" required [(ngModel)]="deliveryMan.date" name="dzte">
+                    
+                    
+                    
+                       
+                          <label for="gender">Gender</label>
+                          <input type="text" class="form-control" id="gender" required [(ngModel)]="deliveryMan.gender" name="gender">
+                       
+                    
+                       
+                        
+                          <label for="address">Address</label>
+                          <input type="text" class="form-control" id="address" ngModel required #address="ngModel" [(ngModel)]="deliveryMan.address" name="address">
+                       
+                        
+                       
+                            <label for="role">Role</label>
+                            <input type="text" class="form-control" id="role"  ngModel required #role="ngModel" [(ngModel)]="deliveryMan.role" name="role">
+                            <div *ngIf="role.touched && role.invalid" > 
+                              <div *ngIf="role.errors.required">Ce champs est obligatoire</div>
+                              
+                          </div>
+                          
+                      
+                            <label for="salary">Salary</label>
+                            <input type="text" class="form-control" id="salary" required [(ngModel)]="deliveryMan.salary" name="salary">
+                          
+                          
+                        
+                            <label for="cin">CIN</label>
+                            <input type="text" class="form-control" id="cin" ngModel required #cin="ngModel" [(ngModel)]="deliveryMan.cin" name="cin">
+                            <div *ngIf="cin.touched && cin.invalid" > 
+                              <div *ngIf="cin.errors.required">ce champs est obligatoire</div>
+                              
+                          </div>
+                          
+                            
+
+
+
+                            <label for="city">City</label>
+                            <input type="text" class="form-control" id="city" ngModel required #city="ngModel" [(ngModel)]="deliveryMan.city" name="city">
+                        
+                            <div *ngIf="city.touched && city.invalid" > 
+                              <div *ngIf="city.errors.required">ce champs est obligatoire</div>
+                              
+                          </div>
+                          </div>
+                      <div class="modal-footer">
+                       
+                          <button  class="btn btn-success"  (click)="onSubmit()">
+                            Add
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                     </div>
+                    
+            </div>
+       </div>
+         
+      
+</div>
+
+</div>
+
+              
+              
+             
+
+
+  
+    

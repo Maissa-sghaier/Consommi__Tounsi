@@ -1,0 +1,9 @@
+.body-background {
+    height: 75vh;
+    background-image: linear-gradient(to right top, #cbe7f7, #c1e4fc)
+}
+
+.h2 {
+    color: #444;
+    font-family: 'PT Sans', sans-serif
+}

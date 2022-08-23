@@ -1,0 +1,136 @@
+<div class="table-responsive  table-hover" *ngIf="cartitems.length>0; else ElseBlock">
+    <table class="table ">
+        <thead class=" head-styling ">
+            <tr   class=" text-center text-uppercase ">
+                <th class="col-md-2">image</th>
+                <th class="col-md-2">article</th>
+                <th class="col-md-2">quantity</th>
+                <th class="col-md-2">total price</th>
+                <th class="col-md-3" >action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr  class="text-center text-muted " *ngFor= "let item of cartitems">
+                <th><img  class="img-styling" src="{{'http://localhost:8082/api/v7/registration/Imgarticles/'+item.productid}}"  ></th>
+                <th  >{{item.productname}}</th>
+                <th >
+                    <button class="btn" (click)= "updateProductQuantity(item.id,item.productname,(-1),item.quantity)"><img src="https://img.icons8.com/pastel-glyph/25/000000/minus--v2.png"/></button>
+                     {{item.quantity}}
+                    <button class="btn" (click)= "updateProductQuantity(item.id,item.productname,1,item.quantity)"><img src="https://img.icons8.com/pastel-glyph/25/000000/plus--v2.png"/></button>
+                </th>
+                <th >{{item.price}}</th>
+                <th><button class="btn" (click)="deletingProduct(item.id)"><i class="fas fa-trash-alt"></i> delete item</button></th>
+            </tr>
+            
+            <tr class="text-center text-muted ">
+                <th>total:</th>
+                <th >{{totalfees}}</th>
+                <th>
+                    <div [ngSwitch]='errMsg'>
+                        <div *ngSwitchDefault></div>
+                        <div *ngSwitchCase="'Wrong code'"><div class="alert alert-warning" role="alert"><p>Wrong code</p></div></div>
+                        <div *ngSwitchCase="'You got a discount'"><div class="alert alert-success" role="alert"><p>You got a discount</p></div></div>
+                    </div>
+                </th>
+                <th colspan="2">
+                    <div class="input-group mb-3">
+                        <input type="text"  [(ngModel)]="codePromo" (ngModelChange) ="onCodeChange($event)"class="form-control" placeholder="Promotional code or gift card" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  </div>
+
+                </th>
+                
+                
+            </tr>
+            <tr>
+                
+                <th  > <button class="btn "><i class="fas fa-hand-holding-heart"></i>donate your cart</button></th>
+                <th></th>
+                <th  > <button class="btn" routerLink="../productList"><i class="fas fa-shopping-cart"></i>back to shopping</button></th>
+                <th></th>
+                <th  > <button class="btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-comment-dollar"></i>proceed to pay</button></th>
+                
+            </tr>
+        </tbody>
+    </table>
+    <!--delivery modal-->
+    <div class="modal fade" *ngIf="!deliverySubmitted" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">please enter your address</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form #addressForm="ngForm"  novalidate >
+            <div class="modal-body">
+            
+                <div class="form-group"><label>Address:</label>
+                    <input required #address="ngModel" [class.is-invalid]="address.invalid && address.touched" type="text"  class="form-control" placeholder="please enter your address" name="address" [(ngModel)]="theAddress.addresLine">
+                    <small class="text-danger" [class.d-none]="address.valid || address.untouched">this field is required</small>
+                </div>
+                <div class="form-group"><label>State:</label>
+                    <select #city="ngModel"  class="custom-select" name="state" [(ngModel)]="theAddress.state">
+                        <option value="default" selected>I live in :</option>
+                        <option *ngFor="let province of provinces">{{province}}</option>
+                    </select>
+                    
+                </div>
+                <div class="form-group"><label>Postal code:</label>
+                    <input required pattern="^\d{4}$" #phone="ngModel" [class.is-invalid]="phone.invalid && phone.touched" type="text" class="form-control" placeholder="please enter your postal code" name="zip" [(ngModel)]="theAddress.zip">
+                    <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">your Postal code is required and must be 4 numbers</small>
+                </div>
+            
+        </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-outline-warning" data-dismiss="modal" data-toggle="modal" data-target="#exampleModalCenter1"(click)="orderCall();">confirm</button>
+            </div>
+        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--deliveryfees-->
+    <div class="modal fade"   id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">your fees are:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>total purchase are: {{totalfees}}</p>
+              <p>your delivery fees are: {{deliveryFees}}</p>
+              <p>Please choose your payment method:</p>
+              <select class="custom-select" name="paymentmethod" [(ngModel)]="paymentmethod">
+                  <option selected value="cash"> cash upon delivery</option>
+                  <option value="stripe">online with stripe</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn btn-outline-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn btn-outline-warning" (click)="pay()">Confirm order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <ng-template #ElseBlock>
+        <div class="container-fluid mt-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        
+                        <div class="card-body cart">
+                            <div class="col-sm-12 empty-cart-cls text-center"> <img src="assets/img/empty-cart-png-Transparent-Images.png" >
+                                <h4>Add something to make me happy :)</h4> <a href="#" class="btn btn-secondary cart-btn-transform m-3" data-abc="true" routerLink="../productList">continue shopping </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    

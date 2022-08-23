@@ -1,0 +1,285 @@
+
+
+<div class="container-fluid" >
+    <div class="row">
+  
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <br/>
+          <label><h4>Filter : </h4></label>
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item" >
+                <h6 >Category:</h6>
+                <select class="dropdown"style="color" ngmodel #idC>
+                  <option value="0" selected disabled hidden>-- -- </option>
+                  <optgroup  *ngFor="let c of categories | async">
+  
+                  <option value="{{c.id_category}}">{{c.name_category}}</option>
+                  </optgroup>
+                </select>
+              </li>
+              <br/>
+  
+              <li class="nav-item">
+                <h6 >Brand :</h6>
+                <select class="dropdown"style="color" ngmodel #idP>
+                  <option value="0" selected disabled hidden>-- -- </option>
+                  <optgroup  *ngFor="let p of providers | async">
+  
+                  <option value="{{p.id_provider}}">{{p.name_provider}}</option>
+                  </optgroup>
+                </select>
+               
+              </li>
+            <br/>
+              <li class="nav-item">
+                <h6 >Price range:</h6>
+                <table>
+                  <td> <input type="text" class="form-control" placeholder="min" value="0" ngmodel #min></td> - 
+                  <td> <input type="text" class="form-control" placeholder="max" value="0" ngmodel #max></td>
+                </table>
+                
+              </li>
+  
+              <br/>
+             
+              <li class="nav-item">
+                <h6 >Rates :</h6>
+                <form  value="0" ngmodel #R >
+                  <div class="rating">
+                      <input id="star5" name="star" type="radio" value="5" class="radio-btn hide" (change)="radioChangeHandler($event)" />
+                      <label for="star5">☆</label>
+                      <input id="star4" name="star" type="radio" value="4" class="radio-btn hide" (change)="radioChangeHandler($event)"  />
+                      <label for="star4">☆</label>
+                      <input id="star3" name="star" type="radio" value="3" class="radio-btn hide" (change)="radioChangeHandler($event)"  />
+                      <label for="star3">☆</label>
+                      <input id="star2" name="star" type="radio" value="2" class="radio-btn hide" (change)="radioChangeHandler($event)" />
+                      <label for="star2">☆</label>
+                      <input id="star1" name="star" type="radio" value="1" class="radio-btn hide" (change)="radioChangeHandler($event)"  />
+                      <label for="star1">☆</label>
+                      <div class="clear"></div>
+                  </div>
+                  <span> selected :</span> <b>{{selectedRate}}</b>
+                  
+              </form>
+              
+              </li>
+              <br/>
+              <li class="nav-item">
+                <h6 >Promotion :</h6>
+                <select class="dropdown"style="color" ngmodel #idProm>
+                  <option value="0" selected disabled hidden>-- -- </option>
+                  <optgroup>
+  
+                  <option value="0">Without</option>
+                  <option value="1">With</option>
+  
+                  </optgroup>
+                </select>    
+                      
+              </li>
+            </ul>
+    
+          </div>
+          <br/>
+  
+          <button class="btn btn-sm btn-outline-secondary" (click)="filtre(idC.value,idP.value,selectedRate,idProm.value,min.value,max.value)">Apply filter!</button>
+        </nav>
+        
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">  
+        <section id="products">
+          <div class="container py-3">
+              <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1" *ngFor="let product of products | async">
+                      <div class="card"> <img class="card-img-top" src="{{this.productService.host+'/api/v7/registration/Imgarticles/'+product.id_product}}" >
+                        
+   
+                        <div class="card-body">
+                              <h6 class="font-weight-bold pt-1">{{product.name}}</h6>
+                              <div class="text-muted description">{{product.description}}</div>
+                              <div class="d-flex sale ">
+                              
+                              <h6 class="mb-0"><span class="badge badge-danger badge-pill badge-news" [hidden]=!product.status_promotion >In promotion <i class="fas fa-percent"></i></span></h6>
+                           
+                            </div>
+
+                              <div class="h6 font-weight-bold">{{product.selling_price}} TND</div>
+                              <div class="d-flex sale ">
+                              
+                            <h6>  <span class="text-success" [hidden]=!product.stock>In stock</span> </h6>
+                            <h6>  <span class="text-danger" [hidden]=product.stock>out of stock</span> </h6>
+  
+                              </div>
+                              <div class="d-flex align-items-center justify-content-between pt-3">
+                                
+                                  <div class="btn btn-sm btn-outline-secondary"><i
+                                    class="fas fa-shopping-cart pr-2"></i>add to cart</div>
+                                  <div class="btn btn-sm btn-outline-secondary" (click)="open(content,product)"><i class="far fa-eye"></i>View details</div>
+
+                                 
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+      </section>
+        </main>
+     <!-- Product list-->   
+        
+ 
+  </div>
+  </div>
+  
+  
+  <ng-template #content let-modal style="width:1250px;">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Details</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <!--Section: Block Content-->
+  <section class="mb-5">
+  
+    <div class="row">
+      <div class="col-md-6 mb-4 mb-md-0">
+  
+        <div id="mdb-lightbox-ui"></div>
+  
+        <div class="mdb-lightbox">
+  
+          <div class="row product-gallery mx-1">
+  
+            <div class="view zoom overlay z-depth-2 rounded">
+                          <figure class="img-fluid w-100">
+                            <img class="card-img-top img-responsive"
+                            src = "{{this.productService.host+'/api/v7/registration/Imgarticles/'+p.id_product}}" 
+                           
+                           alt="">
+              </figure>
+  
+            </div>
+           
+          </div>
+  
+        </div>
+  
+      </div>
+      <div class="col-md-6">
+  <table>
+      <td>  <h5>{{p.name}}</h5> </td>
+      <td>             <h4 class="mb-0"><span class="badge badge-danger badge-pill badge-news" [hidden]=!p.status_promotion >{{p.promotion_percentage}} <i class="fas fa-percent"></i></span></h4>
+      </td>
+  
+  </table> 
+        
+        <ul class="rating">
+          <li *ngFor="let item of [].constructor(5-p.rating)">
+            <i class="far fa-star fa-sm text-primary"></i>
+          </li>
+          <li *ngFor="let item of [].constructor(p.rating)">
+            <i class="fas fa-star fa-sm text-primary"></i>
+          </li>
+         
+         <br> <li> <small>out of : {{p.numberOfRatings}} votes</small></li>
+          </ul>
+        
+        <p><span class="mr-1"> <strong [ngClass]="!p.status_promotion ? 'true' : 'strikethrough'"> {{p.selling_price}} -TND </strong></span></p>
+       
+        <p [hidden]=!p.status_promotion ><span class="mr-1"> <strong> {{p.selling_price_with_promotion}} -TND </strong></span></p>
+        <h5>Description</h5>
+        <p class="pt-1">{{p.description}}</p>
+        <div class="table-responsive">
+          <table class="table table-sm table-borderless mb-0">
+            <tbody>
+              <tr>
+                <th class="pl-0 w-25" scope="row"><strong>Weight</strong></th>
+                <td>{{p.poids}}-kg</td>
+              </tr>
+              <tr>
+                <th class="pl-0 w-25" scope="row"><strong>Bar code</strong></th>
+                <td>{{p.bar_code}} <i class="fas fa-check-circle"></i></td>
+              </tr>
+              <tr [hidden]=!p.status_promotion>
+                <th class="pl-0 w-25" scope="row"><strong>Date start promotion</strong></th>
+                <td>{{p.date_beginning_promotion}}</td>
+              </tr>
+              <tr [hidden]=!p.status_promotion>
+                <th class="pl-0 w-25" scope="row"><strong>Date end promotion</strong></th>
+                <td>{{p.date_end_promotion}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr>
+        <div class="d-flex sale ">
+                              
+          <h6>  <span class="text-success" [hidden]=!p.stock>In stock</span> </h6>
+          <h6>  <span class="text-danger" [hidden]=p.stock>out of stock</span> </h6>
+
+            </div>
+        <div class="table-responsive mb-2">
+          <table class="table table-sm table-borderless">
+            <tbody>
+              <tr>
+                <td class="pl-0 pb-0 w-25">Quantity To order</td>
+              </tr>
+              <tr>
+                <td class="pl-0">
+                  <div class="def-number-input number-input safari_only mb-0">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                      class="btn btn-sm btn-outline-secondary btn-lg"><span class="fas fa-minus"></span></button>
+                    <input class="quantity" min="0" name="quantity" value="1" type="number">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                      class="btn btn-sm btn-outline-secondary  btn-lg"> <span class="fas fa-plus"></span></button>
+                  </div>
+                </td>
+             
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button type="button" class="btn btn-primary btn-md mr-1 mb-2">Buy now</button>
+        <button type="button" class="btn btn-light btn-md mr-1 mb-2"><i
+            class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+           
+          
+      </div>
+    </div>
+  
+  </section>
+  <!--Section: Block Content-->
+    </div>
+    <div class="modal-footer">
+      
+        <form  value="0" ngmodel #R2 >
+          <div class="rating">
+              <input id="star5" name="star2" type="radio" value="5" class="radio-btn hide" (change)="radioChangeHandler($event)" />
+              <label for="star5"><i
+                class="far fa-star" ></i></label>
+              <input id="star4" name="star2" type="radio" value="4" class="radio-btn hide" (change)="radioChangeHandler($event)"  />
+              <label for="star4"><i
+                class="far fa-star" ></i></label>
+              <input id="star3" name="star2" type="radio" value="3" class="radio-btn hide" (change)="radioChangeHandler($event)"  />
+              <label for="star3"><i
+                class="far fa-star" ></i></label>
+              <input id="star2" name="star2" type="radio" value="2" class="radio-btn hide" (change)="radioChangeHandler($event)" />
+              <label for="star2"><i
+                class="far fa-star" ></i></label>
+              <input id="star1" name="star2" type="radio" value="1" class="radio-btn hide" (change)="radioChangeHandler($event)"  />
+              <label for="star1"><i
+                class="far fa-star" ></i></label>
+              <div class="clear"></div>
+          </div>
+          <span> selected :</span> <b>{{selectedRate}}</b>
+          </form>
+          <button type="button" class="btn btn-warning btn-md mr-1 mb-2"><i
+            class="far fa-star" (click)="rate(p.id_product,selectedRate)"></i>Rate it</button>
+    </div>
+    </ng-template>
+  
+   
+  

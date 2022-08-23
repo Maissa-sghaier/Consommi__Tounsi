@@ -1,0 +1,194 @@
+<div class="body-background">
+    <div class="container mt-5 ">
+        <div class='overflow-x-auto w-full'>
+     
+        <table class="table table-borderless table-responsive card-1 p-4 fixed-table" border="1">
+          <thead class="bg-gray-900">
+            <tr class="border-bottom">
+      
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>bar code</th>
+                    <th>poids</th>
+                    <th>exp Date</th>
+                    <th>price</th>
+                  <th>selling price</th>
+                  <th>rating</th>
+                  <th>numberOfRatings</th>
+                  <th>stock</th>
+                  <th>status promotion</th>
+                  <th>promotion percentage</th>
+                  <th>date beginning promotion</th>
+                  <th>date end promotion</th>
+                  <th>selling price with promotion</th>
+                  <th>id category</th>
+                  <th>id provider</th>
+                  <th>image</th>
+                        
+               </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of products | async">
+                  <td><h5>{{p.name}}</h5></td>
+                  <td><h5>{{p.description}}</h5></td>
+                  <td class="text-success"><h5>{{p.bar_code}}</h5></td>
+                  <td><h5>{{p.poids}}</h5></td>
+                  <td><h5>{{p.expDate}}</h5></td>
+                  <td><h5>{{p.price}}</h5></td>
+                  <td><h5>{{p.selling_price}}</h5></td>
+                  <td><h5>{{p.rating}}</h5></td>
+                  <td><h5>{{p.numberOfRatings}}</h5></td>
+                  <td><h5>{{p.stock}}</h5></td>
+                  <td><h5>{{p.status_promotion}}</h5></td>
+                  <td><h5>{{p.promotion_percentage}}</h5></td>
+                  <td><h5>{{p.date_beginning_promotion}}</h5></td>
+                  <td><h5>{{p.date_end_promotion}}</h5></td>
+                  <td><h5>{{p.selling_price_with_promotion}}</h5></td>
+                  <td><h5>{{p.id_category}}</h5></td>
+                  <td><h5>{{p.id_provider}}</h5></td>
+                  <td><img class="card-img-top img-responsive"
+                    src = "{{this.productService.host+'/api/v7/registration/Imgarticles/'+p.id_product}}" 
+                    style = "height :100px;width:100%"
+                   alt=""></td>
+  
+  
+                  <td><button class="btn btn-outline-secondary"  (click)="open2(content2,p.id_product)">upload img</button></td>
+               
+                  <td><button class="btn btn-outline-secondary" [disabled]="!p.status_promotion" (click)="desactivateP(p.id_product)">desactivate Promotion</button></td>
+  
+                  <td><button class="btn btn-outline-secondary" (click)="open(content,p)">update</button></td>
+  
+                  <td><button class="btn btn-outline-secondary" (click)="deleteProduct(p.id_product)">delete</button> </td>
+      
+      
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">update product</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()">
+          <div class="form px-4">
+            <label for="name">Id product</label>
+            <input type="text" class="form-control" id="id_product" disabled [(ngModel)]="productToupload.id_product" name="id_product" >
+          </div>
+  
+          <div class="form px-4">
+            <label for="name">Product Name</label>
+            <input type="text" class="form-control" id="name" required [(ngModel)]="productToupload.name" name="name" >
+          </div>
+      
+          <div class="form px-4">
+              <label for="name">Description</label>
+              <input type="text" class="form-control" id="description" required [(ngModel)]="productToupload.description" name="description">
+            </div>
+        
+            <div class="form px-4">
+              <label for="name">weight</label>
+              <input type="text" class="form-control" id="poids" required [(ngModel)]="productToupload.poids" name="poids">
+            </div>
+        
+            <div class="form px-4">
+              <label for="name">expDate</label>
+              <input type="date" class="form-control" id="expDate" required [(ngModel)]="productToupload.expDate" name="expDate">
+            </div>
+            <div class="form px-4">
+                <label for="name">price</label>
+                <input type="text" class="form-control" id="price" required [(ngModel)]="productToupload.price" name="price">
+              </div>
+              <div class="form px-4">
+                <label for="name">selling_price</label>
+                <input type="text" class="form-control" id="selling_price" required [(ngModel)]="productToupload.selling_price" name="selling_price">
+              </div>
+              <div class="form px-4">
+                <label for="name">stock</label>
+                <input type="number" class="form-control" id="stock" required [(ngModel)]="productToupload.stock" name="stock">
+              </div>
+              <div class="form px-4">
+                <label for="name">status_promotion</label>
+  
+                <select class="dropdown-toggle" id="status_promotion" [(ngModel)]="productToupload.status_promotion" name="status_promotion" >
+                  <option selected disabled hidden>-- -- </option>
+                  <optgroup  >
+                      <option value="false">False</option>
+  
+                  <option value="true">True</option>
+                  </optgroup>
+                </select> 
+             
+              </div>
+              <div class="form px-4">
+                <label for="name">promotion_percentage</label>
+                <input type="number" class="form-control" id="promotion_percentage" [disabled]=!productToupload.status_promotion  [(ngModel)]="productToupload.promotion_percentage" name="promotion_percentage" required>
+              </div>
+              <div class="form px-4">
+                <label for="name">date_beginning_promotion</label>
+                <input type="date" class="form-control" id="date_beginning_promotion" [disabled]=!productToupload.status_promotion required [(ngModel)]="productToupload.date_beginning_promotion" name="date_beginning_promotion" required>
+              </div>
+              <div class="form px-4">
+                <label for="name">date_end_promotion</label>
+                <input type="date" class="form-control" id="date_end_promotion" [disabled]=!productToupload.status_promotion required [(ngModel)]="productToupload.date_end_promotion" name="date_end_promotion">
+              </div>
+              
+              <div class="form px-4">
+                <label for="name">category</label>
+               <!-- <input type="text" class="form-control" id="id_category" required [(ngModel)]="productToupload.id_category" name="id_category"> -->
+                <select class="dropdown-toggle" id="id_category" [(ngModel)]="productToupload.id_category"  name="id_category">
+                  <option  selected disabled hidden>-- -- </option>
+                  <optgroup  *ngFor="let c of categories | async">
+  
+                  <option value="{{c.id_category}}">{{c.name_category}}</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="form px-4">
+                <label for="name">provider</label>
+                <select class="dropdown-toggle" id="id_provider" [(ngModel)]="productToupload.id_provider" name="id_provider">
+                  <option selected disabled hidden>-- -- </option>
+                  <optgroup  *ngFor="let p of providers | async">
+  
+                  <option value="{{p.id_provider}}">{{p.name_provider}}</option>
+                  </optgroup>
+                </select> 
+  
+              </div>
+  
+        </form>
+        </div>
+        <div class="modal-footer">
+         <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">submit</button>-->
+          <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">submit</button>
+  
+        </div>
+      </ng-template>
+  
+  
+  
+  
+      <ng-template #content2 let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">upload image</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="file" class="btn" accept="image/*" (change)="onFileSelected($event)">
+          <img [src]="imgURL" height="200" *ngIf="imgURL">
+        </div>
+        <div class="modal-footer">
+         <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">submit</button>-->
+          <button type="button" class="btn btn-outline-dark" (click)="uploadImg(productIdToupload)">Upload</button>
+  
+        </div>
+      </ng-template>
+    

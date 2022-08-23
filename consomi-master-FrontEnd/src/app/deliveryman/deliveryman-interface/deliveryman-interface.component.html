@@ -1,0 +1,38 @@
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+       <div class="col-md-3 border-right">
+        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+    </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <form #f="ngForm"  (ngSubmit)="onsubmit()"  >      
+                    <div class="inputbox mt-3"> <span>Id</span> <input disabled type="text" class="form-control" id="id_user" required [(ngModel)]="Deliveryman.id_user" name="id_user"> </div>
+                <div class="inputbox mt-3"> <span>First Name</span> <input  name="first_name" type="text" class="form-control" id="first_name" ngModel required #firstname="ngModel" [(ngModel)]="Deliveryman.first_name"> </div>
+                <div *ngIf="firstname.invalid && firstname.touched" > Ce champs obligatoire</div>  
+                
+                
+                <div class="inputbox mt-3"> <span>Last Name</span> <input type="text" class="form-control" id="last_name" required [(ngModel)]="Deliveryman.last_name" name="last_name"> </div>
+                  <div class="inputbox mt-3"> <span>Username</span> <input type="text" class="form-control" id="username" required [(ngModel)]="Deliveryman.username" name="username"> </div>
+                  <div class="inputbox mt-3"> <span>Email</span> <input type="text" placeholder="your-email@site.com" class="form-control" id="email" required [(ngModel)]="Deliveryman.email" name="email"> </div>
+                  <div class="inputbox mt-3"> <span>Phone number</span> <input type="text" class="form-control" id="phone_number" required [(ngModel)]="Deliveryman.phone_number" name="phone_number"> </div>
+                  <div class="inputbox mt-3"> <span>Password</span> <input type="password" class="form-control" id="password" required [(ngModel)]="Deliveryman.password" name="password"> </div>
+                  <div class="inputbox mt-3"> <span>gender</span> <input type="text" class="form-control" id="gender" required [(ngModel)]="Deliveryman.gender" name="gender"> </div>
+                  <div class="inputbox mt-3"> <span>Address</span> <input type="text" class="form-control" id="address" required [(ngModel)]="Deliveryman.address" name="address"> </div>
+                  <div class="inputbox mt-3"> <span>City</span> <input type="text" class="form-control" id="city" required [(ngModel)]="Deliveryman.city" name="city"> </div>
+                  <div class="inputbox mt-3"> <span>Role</span> <input disabled type="text" class="form-control" id="role" required [(ngModel)]="Deliveryman.role" name="role"> </div>
+            <div class="inputbox mt-3"> <span>Date Creation Du Compte</span> <input disabled type="text" class="form-control" id="date" required [(ngModel)]="Deliveryman.date" name="date"> </div>
+            <div class="inputbox mt-3"> <span>Cin</span> <input disabled type="text" class="form-control" id="cin" required [(ngModel)]="Deliveryman.cin" name="cin"> </div>
+            <div class="inputbox mt-3"> <span>Salary</span> <input disabled type="text" class="form-control" id="salary" required [(ngModel)]="Deliveryman.salary" name="Salary"> </div>
+                  
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" [disabled]="f.invalid" type="submit">Save Profile</button></div>
+            
+              </form>
+            </div>
+        </div>
+       
+    </div>
+</div>

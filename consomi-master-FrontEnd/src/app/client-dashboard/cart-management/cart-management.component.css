@@ -1,0 +1,17 @@
+.table{
+    align-self: center;
+    max-width:85% ;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: #e48400;
+
+
+}
+.head-styling{
+    background-color:#e48400;
+}
+.img-styling{
+    max-width: 50px;
+}
